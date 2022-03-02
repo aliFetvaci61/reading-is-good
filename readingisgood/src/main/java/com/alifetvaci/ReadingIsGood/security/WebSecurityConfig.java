@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.alifetvaci.ReadingIsGood.security.jwt.AuthEntryPointJwt;
 import com.alifetvaci.ReadingIsGood.security.jwt.AuthTokenFilter;
 import com.alifetvaci.ReadingIsGood.security.services.CustomerServiceImpl;
+import com.alifetvaci.ReadingIsGood.security.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -30,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private AuthEntryPointJwt unauthorizedHandler;
 	
 	@Autowired
-	private CustomerServiceImpl customerDetailsServiceImpl;
+	private UserDetailsServiceImpl userDetailsServiceImpl;
 
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -39,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		authenticationManagerBuilder.userDetailsService(customerDetailsServiceImpl).passwordEncoder(passwordEncoder()).and().inMemoryAuthentication() .withUser("Zack")
+		authenticationManagerBuilder.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder()).and().inMemoryAuthentication() .withUser("Zack")
         .password("aayush")
         .roles("admin_role");
 	}

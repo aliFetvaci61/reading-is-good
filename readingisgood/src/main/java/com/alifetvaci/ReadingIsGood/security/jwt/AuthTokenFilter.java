@@ -18,14 +18,15 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.alifetvaci.ReadingIsGood.security.services.CustomerServiceImpl;
+import com.alifetvaci.ReadingIsGood.security.services.UserDetailsServiceImpl;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtUtils jwtUtils;
 
 	@Autowired
-	private CustomerServiceImpl customerDetailsServiceImpl;
-
+	private UserDetailsServiceImpl userDetailsServiceImpl;
+	
 	private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
 	@Override
@@ -36,7 +37,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
 				String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-				UserDetails userDetails = customerDetailsServiceImpl.loadUserByUsername(username);
+				UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

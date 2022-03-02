@@ -29,9 +29,8 @@ public class Book {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Book(String id, String name, String writer, String edition, int total, double price) {
+	public Book(String name, String writer, String edition, int total, double price) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.writer = writer;
 		this.edition = edition;
