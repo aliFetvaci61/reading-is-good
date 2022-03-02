@@ -13,14 +13,10 @@ public class Customer {
 	@JsonIgnore
 	private String id;
 
-	@NotBlank
 	private String username;
 
-	@NotBlank
 	private String email;
 
-	@NotBlank
-	@Size(max = 120)
 	private String password;
 
 

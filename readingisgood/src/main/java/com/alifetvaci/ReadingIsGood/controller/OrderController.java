@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alifetvaci.ReadingIsGood.exception.ForbiddenException;
+import com.alifetvaci.ReadingIsGood.exception.BadRequestException;
 import com.alifetvaci.ReadingIsGood.models.Book;
 import com.alifetvaci.ReadingIsGood.models.Order;
 import com.alifetvaci.ReadingIsGood.models.OrderStatus;
@@ -62,7 +65,7 @@ public class OrderController {
 
 	@PostMapping("/order")
 	@PreAuthorize("#authentication == authentication")
-	public ResponseEntity<Order> createOrder(@Valid @RequestBody OrderRequest orderRequest,
+	public ResponseEntity<Order> createOrder( @RequestBody @Valid OrderRequest orderRequest,
 			Authentication authentication) {
 		String authanticationCustomerId = customerDetailService.getAuthanticationCustomerId(authentication);
 
@@ -108,23 +111,19 @@ public class OrderController {
 	@PreAuthorize("#authentication == authentication")
 	public ResponseEntity<?> getOrders(Authentication authentication, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "3") int size) {
-		try {
-			String authanticationCustomerId = customerDetailService.getAuthanticationCustomerId(authentication);
-			List<Order> orders = new ArrayList<Order>();
-			Pageable paging = PageRequest.of(page, size);
-			Page<Order> pageOrders = orderRepository.findByCustomerId(authanticationCustomerId, paging);
-			orders = pageOrders.getContent();
-			Map<String, Object> response = new HashMap<>();
-			response.put("orders", orders);
-			response.put("currentPage", pageOrders.getNumber());
-			response.put("totalItems", pageOrders.getTotalElements());
-			response.put("totalPages", pageOrders.getTotalPages());
-			logger.info("get Orders");
-			return new ResponseEntity<>(response, HttpStatus.OK);
-		} catch (Exception e) {
-			logger.info("get Orders" +  e.getLocalizedMessage());
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+
+		String authanticationCustomerId = customerDetailService.getAuthanticationCustomerId(authentication);
+		List<Order> orders = new ArrayList<Order>();
+		Pageable paging = PageRequest.of(page, size);
+		Page<Order> pageOrders = orderRepository.findByCustomerId(authanticationCustomerId, paging);
+		orders = pageOrders.getContent();
+		Map<String, Object> response = new HashMap<>();
+		response.put("orders", orders);
+		response.put("currentPage", pageOrders.getNumber());
+		response.put("totalItems", pageOrders.getTotalElements());
+		response.put("totalPages", pageOrders.getTotalPages());
+		logger.info("get Orders");
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 
@@ -134,15 +133,15 @@ public class OrderController {
 
 		Order order = orderRepository.findById(id).orElse(null);
 		if(order==null) {
-			logger.info("Not Found Order");
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+			logger.info("Not found order id : " + id);
+			throw new BadRequestException("Not found order id : " + id);
 		}
 		if (customerDetailService.checkFraud(authentication, order.getCustomerId())) {
 			logger.info("get Order Details");
 			return new ResponseEntity<>(order, HttpStatus.OK);
 		} else {
 			logger.info("Forbidden order Fraud");
-			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+			throw new ForbiddenException("Forbidden order Fraud");
 		}
 
 	}

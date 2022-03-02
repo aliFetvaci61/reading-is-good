@@ -1,5 +1,7 @@
 package com.alifetvaci.ReadingIsGood.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alifetvaci.ReadingIsGood.exception.BadRequestException;
 import com.alifetvaci.ReadingIsGood.models.Book;
 import com.alifetvaci.ReadingIsGood.payload.request.BookRequest;
 import com.alifetvaci.ReadingIsGood.payload.request.BookStockRequest;
@@ -26,7 +29,7 @@ public class BookController {
 	private BookRepository bookRepository;
 
 	@PostMapping("/book")
-	public ResponseEntity<Book> persistNewBook(@RequestBody BookRequest bookRequest) {
+	public ResponseEntity<Book> persistNewBook(@RequestBody @Valid BookRequest bookRequest) {
 		Book book = new Book();
 		book.setName(bookRequest.getName());
 		book.setWriter(bookRequest.getWriter());
@@ -41,12 +44,13 @@ public class BookController {
 
 	@PutMapping("/book/{id}")
 	public ResponseEntity<Book> updateBooksStock(@PathVariable String id,
-			@RequestBody BookStockRequest bookStockRequest) {
+			@RequestBody @Valid BookStockRequest bookStockRequest) {
 		Book book = bookRepository.findById(id).orElse(null);
 		if (book != null) {
 			book.setTotal(bookStockRequest.getTotal());
 		} else {
-			return ResponseEntity.badRequest().build();
+			logger.info("Invalid book id : " + id);
+			throw new BadRequestException("Invalid book id : " + id);
 		}
 		logger.info("Updated Book Stock");
 		bookRepository.save(book);

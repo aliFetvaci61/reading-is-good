@@ -1,5 +1,6 @@
 package com.alifetvaci.ReadingIsGood.payload.request;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 public class BookRequest {
@@ -13,10 +14,10 @@ public class BookRequest {
 	@NotBlank
 	private String edition;
 
-	@NotBlank
+	@Min(value = 1, message = "total should not be less than 1")
 	private int total;
 	
-	@NotBlank
+	@Min(value = 1, message = "price should not be less than 1")
 	private double price;
 
 	public String getName() {

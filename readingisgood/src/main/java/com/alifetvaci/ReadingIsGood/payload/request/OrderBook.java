@@ -1,16 +1,26 @@
 package com.alifetvaci.ReadingIsGood.payload.request;
 
-
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class OrderBook {
 
-	@NotNull(message="book ID cannot be null")
+	@Size(min=10)
 	private String book;
 	
-    @Min(1)
+	@Min(value = 1)
 	private int number;
+
+	public OrderBook() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public OrderBook(String book, int number) {
+		super();
+		this.book = book;
+		this.number = number;
+	}
 
 	public String getBook() {
 		return book;

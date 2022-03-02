@@ -3,7 +3,9 @@ package com.alifetvaci.ReadingIsGood.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 
@@ -16,10 +18,11 @@ public class Order {
 	@JsonIgnore
 	private String id;
 	
-	@NotBlank
+	@NotNull
 	private String customerId;
 	
-	@NotBlank
+	@Valid
+	@NotNull
 	private List<OrderBook> orderBooks;
 	
 	private OrderStatus orderStatus;

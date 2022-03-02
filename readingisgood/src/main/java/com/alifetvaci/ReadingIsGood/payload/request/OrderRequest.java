@@ -2,12 +2,24 @@ package com.alifetvaci.ReadingIsGood.payload.request;
 
 import java.util.List;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 public class OrderRequest {
 
-	@NotEmpty(message = "Input book list cannot be empty.")
+	@Valid
+	@NotNull
 	private List<OrderBook> orderBook;
+	
+	public OrderRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public OrderRequest(List<OrderBook> orderBook) {
+		super();
+		this.orderBook = orderBook;
+	}
 
 	public List<OrderBook> getOrderBook() {
 		return orderBook;

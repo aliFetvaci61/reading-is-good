@@ -1,5 +1,7 @@
 package com.alifetvaci.ReadingIsGood.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alifetvaci.ReadingIsGood.exception.BadRequestException;
 import com.alifetvaci.ReadingIsGood.models.Customer;
 import com.alifetvaci.ReadingIsGood.payload.request.LoginCustomer;
 import com.alifetvaci.ReadingIsGood.payload.request.RegisterCustomer;
@@ -40,10 +43,11 @@ public class CustomerController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/auth/register")
-	public ResponseEntity<Customer> registerCustomer(@RequestBody RegisterCustomer registerCustomer) {
+	public ResponseEntity<Customer> registerCustomer(@RequestBody @Valid RegisterCustomer registerCustomer) {
 		
 		if (customerRepository.existsByEmail(registerCustomer.getEmail())) {
-			return ResponseEntity.badRequest().build();
+			logger.info("Email exist : " + registerCustomer.getEmail());
+			throw new BadRequestException("Email exist : " + registerCustomer.getEmail());
 		}
 		
 		Customer customer = new Customer();
@@ -58,7 +62,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/auth/login")
-	public ResponseEntity<JwtResponse> loginCustomer(@RequestBody LoginCustomer login) {
+	public ResponseEntity<JwtResponse> loginCustomer(@RequestBody @Valid LoginCustomer login) {
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
 
