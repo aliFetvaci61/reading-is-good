@@ -1,6 +1,6 @@
 # reading-is-good
 
-
+# Change directory
 cd readingisgood
 
 # Create fat jar. open cmd or terminal run the following command
