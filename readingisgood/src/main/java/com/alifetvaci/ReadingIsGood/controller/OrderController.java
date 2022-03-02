@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alifetvaci.ReadingIsGood.models.Order;
 import com.alifetvaci.ReadingIsGood.payload.request.OrderRequest;
-import com.alifetvaci.ReadingIsGood.security.services.CustomerDetailsService;
-import com.alifetvaci.ReadingIsGood.security.services.OrderService;
+import com.alifetvaci.ReadingIsGood.services.CustomerDetailsService;
+import com.alifetvaci.ReadingIsGood.services.OrderService;
 
 @RestController
 @RequestMapping("/api")

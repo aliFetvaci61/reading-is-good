@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.security.services;
+package com.alifetvaci.ReadingIsGood.services;
 
 import java.util.Date;
 import java.util.List;

@@ -16,8 +16,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.alifetvaci.ReadingIsGood.security.jwt.AuthEntryPointJwt;
 import com.alifetvaci.ReadingIsGood.security.jwt.AuthTokenFilter;
-import com.alifetvaci.ReadingIsGood.security.services.CustomerServiceImpl;
-import com.alifetvaci.ReadingIsGood.security.services.UserDetailsServiceImpl;
+import com.alifetvaci.ReadingIsGood.services.CustomerServiceImpl;
+import com.alifetvaci.ReadingIsGood.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity

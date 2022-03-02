@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alifetvaci.ReadingIsGood.models.Book;
 import com.alifetvaci.ReadingIsGood.payload.request.BookRequest;
 import com.alifetvaci.ReadingIsGood.payload.request.BookStockRequest;
-import com.alifetvaci.ReadingIsGood.security.services.BookService;
+import com.alifetvaci.ReadingIsGood.services.BookService;
 
 @RestController
 @RequestMapping("/api")

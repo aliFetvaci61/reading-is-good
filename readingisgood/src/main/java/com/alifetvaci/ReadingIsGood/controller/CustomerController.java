@@ -13,7 +13,7 @@ import com.alifetvaci.ReadingIsGood.models.Customer;
 import com.alifetvaci.ReadingIsGood.payload.request.LoginCustomer;
 import com.alifetvaci.ReadingIsGood.payload.request.RegisterCustomer;
 import com.alifetvaci.ReadingIsGood.payload.response.JwtResponse;
-import com.alifetvaci.ReadingIsGood.security.services.CustomerService;
+import com.alifetvaci.ReadingIsGood.services.CustomerService;
 
 @RestController
 @RequestMapping("/api")

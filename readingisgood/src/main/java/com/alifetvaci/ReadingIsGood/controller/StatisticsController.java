@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.alifetvaci.ReadingIsGood.security.services.CustomerDetailsService;
-import com.alifetvaci.ReadingIsGood.security.services.StatisticsService;
+import com.alifetvaci.ReadingIsGood.services.CustomerDetailsService;
+import com.alifetvaci.ReadingIsGood.services.StatisticsService;
 
 @Controller
 @RequestMapping("/api")

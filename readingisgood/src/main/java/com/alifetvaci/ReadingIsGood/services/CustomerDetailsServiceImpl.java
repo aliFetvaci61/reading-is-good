@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.security.services;
+package com.alifetvaci.ReadingIsGood.services;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;

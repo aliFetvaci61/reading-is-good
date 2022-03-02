@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.security.services;
+package com.alifetvaci.ReadingIsGood.services;
 
 import com.alifetvaci.ReadingIsGood.models.Customer;
 import com.alifetvaci.ReadingIsGood.payload.request.LoginCustomer;
