@@ -1,0 +1,303 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ReadingIsGood",
+		"_postman_id": "1d73418c-59a7-d1c1-7749-71431ed30200",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register Customer",
+			"request": {
+				"url": "http://localhost:8080/api/auth/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"username1\",\n\t\"email\":\"email1\",\n\t\"password\":\"username1\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Login Customer",
+			"request": {
+				"url": "http://localhost:8080/api/auth/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"email1\",\n\t\"password\":\"username1\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"request": {
+				"url": "http://localhost:8080/api/order",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"orderBook\":[\r\n      {\r\n         \"book\":\"621f4e4214710747d7a7a1b3\",\r\n         \"number\" : 2\r\n      },\r\n      {\r\n         \"book\":\"621f4e5114710747d7a7a1b4\",\r\n         \"number\" : 2\r\n      }\r\n   ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Persist New Book",
+			"request": {
+				"url": "http://localhost:8080/api/book",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"Kavak Yelleri2\",\r\n   \"writer\":\"Ali Fetvacı2\",\r\n   \"edition\":\"13. Edition\",\r\n   \"total\":20,\r\n   \"price\":5.4\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Book Stock",
+			"request": {
+				"url": "http://localhost:8080/api/book/621f4e4214710747d7a7a1b3",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"total\":30\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Order",
+			"request": {
+				"url": "http://localhost:8080/api/order",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"order\":[    \r\n    {\"book\":\"Ram\", \"total\":23},    \r\n    {\"book\":\"Shyam\", \"total\":28}\r\n]}  "
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Order Details",
+			"request": {
+				"url": "http://localhost:8080/api/order/621f4ec714710747d7a7a1b5",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"order\":[    \r\n    {\"book\":\"Ram\", \"total\":23},    \r\n    {\"book\":\"Shyam\", \"total\":28}\r\n]}  "
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List Order By Date Interval",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/order/listOrdersByDateInterval?startDate=01022022&endData=03032022",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"order",
+						"listOrdersByDateInterval"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "01022022",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "endData",
+							"value": "03032022",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"order\":[    \r\n    {\"book\":\"Ram\", \"total\":23},    \r\n    {\"book\":\"Shyam\", \"total\":28}\r\n]}  "
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Order Count (Statistics)",
+			"request": {
+				"url": "http://localhost:8080/api/statistics/order-count",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"order\":[    \r\n    {\"book\":\"Ram\", \"total\":23},    \r\n    {\"book\":\"Shyam\", \"total\":28}\r\n]}  "
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Purchased Order Amount(Statistics)",
+			"request": {
+				"url": "http://localhost:8080/api/statistics/purchased-amount",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"order\":[    \r\n    {\"book\":\"Ram\", \"total\":23},    \r\n    {\"book\":\"Shyam\", \"total\":28}\r\n]}  "
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Purchased books(Statistics)",
+			"request": {
+				"url": "http://localhost:8080/api/statistics/purchased-books",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"order\":[    \r\n    {\"book\":\"Ram\", \"total\":23},    \r\n    {\"book\":\"Shyam\", \"total\":28}\r\n]}  "
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

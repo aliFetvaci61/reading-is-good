@@ -1,0 +1,302 @@
+openapi: 3.0.0
+info:
+  title: ReadingIsGood
+  description: ''
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/auth/register:
+    post:
+      tags:
+        - General
+      summary: Register Customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: username1
+                email: email1
+                password: username1
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/auth/login:
+    post:
+      tags:
+        - General
+      summary: Login Customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: email1
+                password: username1
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/order:
+    post:
+      tags:
+        - General
+      summary: Create Order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                orderBook:
+                  - book: 621f4e4214710747d7a7a1b3
+                    number: 2
+                  - book: 621f4e5114710747d7a7a1b4
+                    number: 2
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - General
+      summary: Get Customer Order
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/book:
+    post:
+      tags:
+        - General
+      summary: Persist New Book
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Kavak Yelleri2
+                writer: Ali FetvacÄ±2
+                edition: 13. Edition
+                total: 20
+                price: 5.4
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/book/621f4e4214710747d7a7a1b3:
+    put:
+      tags:
+        - General
+      summary: Update Book Stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                total: 30
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/order/621f4ec714710747d7a7a1b5:
+    get:
+      tags:
+        - General
+      summary: Get Customer Order Details
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/order/listOrdersByDateInterval:
+    get:
+      tags:
+        - General
+      summary: List Order By Date Interval
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+        - name: startDate
+          in: query
+          schema:
+            type: integer
+          example: '01022022'
+        - name: endData
+          in: query
+          schema:
+            type: integer
+          example: '03032022'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/statistics/order-count:
+    get:
+      tags:
+        - General
+      summary: Get Customer Order Count (Statistics)
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/statistics/purchased-amount:
+    get:
+      tags:
+        - General
+      summary: Get Customer Purchased Order Amount(Statistics)
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/statistics/purchased-books:
+    get:
+      tags:
+        - General
+      summary: Get Customer Purchased books(Statistics)
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEiLCJpYXQiOjE2NDYxNTc2ODcsImV4cCI6MTY0NjI0NDA4N30.8RqvY8NlaNJCILKa5_M1Bvxm65r4nzRUfwGvSW4pd81b9U7_0E7pM4azkenbhRsgJthna7Cm-1rImYIWn4Pphg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
