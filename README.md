@@ -1,5 +1,9 @@
 # reading-is-good
 
+I am using Java (SDK 11), Spring Framework (spring boot) , mongodb
+
+I created swagger.json for open api documentation and also I pushed postman collection. You can use it.
+
 # Change directory
 cd readingisgood
 
@@ -18,3 +22,5 @@ docker run --name mongodb -p 27017:27017 mongo
 docker build -t readingisgood .
 
 docker run -p 8080:8080 readingisgood
+
+(I am using docker desktop)
