@@ -1,16 +1,14 @@
 package com.alifetvaci.ReadingIsGood.models;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+@Document("customers")
 public class Customer {
 
 	@Id
-	@JsonIgnore
 	private String id;
 
 	private String username;
@@ -19,15 +17,12 @@ public class Customer {
 
 	private String password;
 
-
 	public Customer() {
 		super();
 	}
 
-	public Customer(String id, @NotBlank String username, @NotBlank String email,
-			@NotBlank @Size(max = 120) String password) {
+	public Customer(String username, @NotBlank String email, String password) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -64,7 +59,10 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + "]";
+	}
 
 }

@@ -1,17 +1,12 @@
 package com.alifetvaci.ReadingIsGood.models;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+@Document("books")
 public class Book {
 
 	@Id
-	@JsonIgnore
 	private String id;
 
 	private String name;
@@ -27,6 +22,16 @@ public class Book {
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Book(String id,String name, String writer, String edition, int total, double price) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.writer = writer;
+		this.edition = edition;
+		this.total = total;
+		this.price = price;
 	}
 
 	public Book(String name, String writer, String edition, int total, double price) {
@@ -85,5 +90,13 @@ public class Book {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", name=" + name + ", writer=" + writer + ", edition=" + edition + ", total=" + total
+				+ ", price=" + price + "]";
+	}
+	
+	
 
 }

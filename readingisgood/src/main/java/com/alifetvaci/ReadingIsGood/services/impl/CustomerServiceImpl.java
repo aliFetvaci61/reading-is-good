@@ -15,12 +15,14 @@ import org.springframework.stereotype.Service;
 
 import com.alifetvaci.ReadingIsGood.exception.BadRequestException;
 import com.alifetvaci.ReadingIsGood.models.Customer;
+import com.alifetvaci.ReadingIsGood.models.LogType;
 import com.alifetvaci.ReadingIsGood.payload.request.LoginCustomer;
 import com.alifetvaci.ReadingIsGood.payload.request.RegisterCustomer;
 import com.alifetvaci.ReadingIsGood.payload.response.JwtResponse;
 import com.alifetvaci.ReadingIsGood.repository.CustomerRepository;
 import com.alifetvaci.ReadingIsGood.security.jwt.JwtUtils;
 import com.alifetvaci.ReadingIsGood.services.CustomerService;
+import com.alifetvaci.ReadingIsGood.services.LogService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -28,16 +30,19 @@ public class CustomerServiceImpl implements CustomerService {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
 	@Autowired
-	CustomerRepository customerRepository;
+	private CustomerRepository customerRepository;
 
 	@Autowired
-	PasswordEncoder encoder;
+	private PasswordEncoder encoder;
 
 	@Autowired
-	AuthenticationManager authenticationManager;
+	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	JwtUtils jwtUtils;
+	private JwtUtils jwtUtils;
+	
+	@Autowired
+	private LogService logService;
 
 	@Override
 	public Customer registerCustomer(RegisterCustomer registerCustomer) {
@@ -53,6 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setUsername(registerCustomer.getUsername());
 		Customer savedCustomer = customerRepository.save(customer);
 		logger.info("Registered new Customer");
+		logService.insertLog(savedCustomer.getId(),LogType.NEW_ENTITY, savedCustomer.toString(),null);
 		return savedCustomer;
 	}
 

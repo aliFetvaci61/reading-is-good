@@ -25,4 +25,11 @@ public class OrderBook {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderBook [book=" + book + ", total=" + total + "]";
+	}
+	
+	
 }

@@ -4,34 +4,50 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.alifetvaci.ReadingIsGood.payload.request.OrderBook;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+@Document("orders")
 public class Order {
-	
+
 	@Id
-	@JsonIgnore
 	private String id;
-	
+
 	@NotNull
 	private String customerId;
-	
+
 	@Valid
 	@NotNull
 	private List<OrderBook> orderBooks;
-	
+
 	private OrderStatus orderStatus;
-	
+
 	private Date createdAt;
-	
+
 	private Date updatedAt;
-	
+
 	private double purchase;
+
+	public Order() {
+		super();
+	}
+
+	public Order(String id, @NotNull String customerId, @Valid @NotNull List<OrderBook> orderBooks,
+			OrderStatus orderStatus, Date createdAt, Date updatedAt, double purchase) {
+		super();
+		this.id = id;
+		this.customerId = customerId;
+		this.orderBooks = orderBooks;
+		this.orderStatus = orderStatus;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.purchase = purchase;
+	}
 
 	public String getId() {
 		return id;
@@ -88,7 +104,12 @@ public class Order {
 	public void setPurchase(double purchase) {
 		this.purchase = purchase;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", customerId=" + customerId + ", orderBooks=" + orderBooks + ", orderStatus="
+				+ orderStatus + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", purchase=" + purchase
+				+ "]";
+	}
 
 }

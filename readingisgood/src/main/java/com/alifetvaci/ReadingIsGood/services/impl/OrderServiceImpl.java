@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.alifetvaci.ReadingIsGood.exception.BadRequestException;
 import com.alifetvaci.ReadingIsGood.exception.ForbiddenException;
 import com.alifetvaci.ReadingIsGood.models.Book;
+import com.alifetvaci.ReadingIsGood.models.LogType;
 import com.alifetvaci.ReadingIsGood.models.Order;
 import com.alifetvaci.ReadingIsGood.models.OrderStatus;
 import com.alifetvaci.ReadingIsGood.payload.request.OrderBook;
@@ -26,6 +27,7 @@ import com.alifetvaci.ReadingIsGood.payload.request.OrderRequest;
 import com.alifetvaci.ReadingIsGood.repository.BookRepository;
 import com.alifetvaci.ReadingIsGood.repository.OrderRepository;
 import com.alifetvaci.ReadingIsGood.services.BookService;
+import com.alifetvaci.ReadingIsGood.services.LogService;
 import com.alifetvaci.ReadingIsGood.services.OrderService;
 
 @Service
@@ -41,6 +43,9 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Autowired
 	private BookService bookStockService;
+	
+	@Autowired
+	private LogService logService;
 
 	@Override
 	public Order createOrder(String CustomerId, OrderRequest orderRequest) {
@@ -54,8 +59,11 @@ public class OrderServiceImpl implements OrderService{
 		order.setCreatedAt(time);
 		
 		Order saved = orderRepository.save(order);
-
-		boolean updateBookStock = bookStockService.updateBookStock(orderRequest.getOrderBook());
+		Order order1 =  new Order(saved.getId(),saved.getCustomerId(),saved.getOrderBooks(),saved.getOrderStatus(),saved.getCreatedAt(),saved.getUpdatedAt(),saved.getPurchase());
+		
+		logService.insertLog(LogType.NEW_ENTITY, saved.toString(), null);
+		
+		boolean updateBookStock = bookStockService.updateBookStockOrderCreate(orderRequest.getOrderBook());
 
 		if (updateBookStock) {
 			Iterator<OrderBook> iterator = order.getOrderBooks().iterator();
@@ -74,7 +82,9 @@ public class OrderServiceImpl implements OrderService{
 		}
 		saved.setUpdatedAt(new Date());
 		logger.info("Order Created");
-		return orderRepository.save(saved);
+		Order updated = orderRepository.save(saved);
+		logService.insertLog(LogType.NEW_ENTITY, updated.toString(), order1.toString());
+		return updated;
 	}
 
 	@Override
