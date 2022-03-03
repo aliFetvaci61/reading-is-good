@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.services;
+package com.alifetvaci.ReadingIsGood.services.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +25,8 @@ import com.alifetvaci.ReadingIsGood.payload.request.OrderBook;
 import com.alifetvaci.ReadingIsGood.payload.request.OrderRequest;
 import com.alifetvaci.ReadingIsGood.repository.BookRepository;
 import com.alifetvaci.ReadingIsGood.repository.OrderRepository;
+import com.alifetvaci.ReadingIsGood.services.BookService;
+import com.alifetvaci.ReadingIsGood.services.OrderService;
 
 @Service
 public class OrderServiceImpl implements OrderService{

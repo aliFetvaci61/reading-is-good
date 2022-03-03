@@ -17,8 +17,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.alifetvaci.ReadingIsGood.services.CustomerServiceImpl;
-import com.alifetvaci.ReadingIsGood.services.UserDetailsServiceImpl;
+import com.alifetvaci.ReadingIsGood.services.impl.CustomerServiceImpl;
+import com.alifetvaci.ReadingIsGood.services.impl.UserDetailsServiceImpl;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired

@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.services;
+package com.alifetvaci.ReadingIsGood.services.impl;
 
 import java.util.Collection;
 

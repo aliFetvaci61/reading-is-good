@@ -1,7 +1,9 @@
-package com.alifetvaci.ReadingIsGood.services;
+package com.alifetvaci.ReadingIsGood.services.impl;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import com.alifetvaci.ReadingIsGood.services.CustomerDetailsService;
 
 @Service
 public class CustomerDetailsServiceImpl  implements CustomerDetailsService{

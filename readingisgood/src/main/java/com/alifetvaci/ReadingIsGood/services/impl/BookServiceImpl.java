@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.services;
+package com.alifetvaci.ReadingIsGood.services.impl;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import com.alifetvaci.ReadingIsGood.payload.request.BookRequest;
 import com.alifetvaci.ReadingIsGood.payload.request.BookStockRequest;
 import com.alifetvaci.ReadingIsGood.payload.request.OrderBook;
 import com.alifetvaci.ReadingIsGood.repository.BookRepository;
+import com.alifetvaci.ReadingIsGood.services.BookService;
 
 @Service
 public class BookServiceImpl implements BookService {

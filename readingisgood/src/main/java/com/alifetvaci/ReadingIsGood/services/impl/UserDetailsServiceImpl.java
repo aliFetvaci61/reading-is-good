@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.services;
+package com.alifetvaci.ReadingIsGood.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.alifetvaci.ReadingIsGood.models.Customer;
 import com.alifetvaci.ReadingIsGood.repository.CustomerRepository;
+import com.alifetvaci.ReadingIsGood.services.IAuthenticationFacadeService;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService , IAuthenticationFacadeService {

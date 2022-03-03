@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.services;
+package com.alifetvaci.ReadingIsGood.services.impl;
 
 import java.time.Month;
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import com.alifetvaci.ReadingIsGood.models.TotalCountOfPurchasedBook;
 import com.alifetvaci.ReadingIsGood.payload.response.OrderCount;
 import com.alifetvaci.ReadingIsGood.payload.response.OrdersAmount;
 import com.alifetvaci.ReadingIsGood.repository.OrderRepository;
+import com.alifetvaci.ReadingIsGood.services.StatisticsService;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService {

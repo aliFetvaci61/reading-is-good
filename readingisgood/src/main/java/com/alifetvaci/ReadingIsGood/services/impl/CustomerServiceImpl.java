@@ -1,4 +1,4 @@
-package com.alifetvaci.ReadingIsGood.services;
+package com.alifetvaci.ReadingIsGood.services.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,7 @@ import com.alifetvaci.ReadingIsGood.payload.request.RegisterCustomer;
 import com.alifetvaci.ReadingIsGood.payload.response.JwtResponse;
 import com.alifetvaci.ReadingIsGood.repository.CustomerRepository;
 import com.alifetvaci.ReadingIsGood.security.jwt.JwtUtils;
+import com.alifetvaci.ReadingIsGood.services.CustomerService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
