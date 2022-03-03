@@ -24,8 +24,8 @@ public class BookServiceImpl implements BookService {
 	private static final Logger logger = LoggerFactory.getLogger(BookServiceImpl.class);
 
 	@Override
-	public boolean updateBookStock(List<OrderBook> list) {
-
+	public synchronized boolean updateBookStock(List<OrderBook> list) { //if it happens if 2 or more users tries to buy one last book at the same time
+		//One thread one transaction, before the end of the transaction  the other transaction not working, just waiting .
 		for (OrderBook oB : list) {
 			Book bookStock = bookRepository.findById(oB.getBook()).orElse(null);
 			if (bookStock == null) {
