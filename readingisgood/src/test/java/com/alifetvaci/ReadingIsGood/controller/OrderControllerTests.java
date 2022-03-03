@@ -14,8 +14,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @AutoConfigureMockMvc
 public class OrderControllerTests {
 
-	//If you are testing you should change bearer token :(
-	private final String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDkiLCJpYXQiOjE2NDYyMzMzODEsImV4cCI6MTY0NjMxOTc4MX0.YLEeQCtk1GmkL0Gw8bWB0ilQnydztRqw-ynjgB7vE_hGUaS35W39CoX1FxHI0C0L_Rsx9J7EvAN_5T8v21kiSQ";
+	//If you are run testing you should change bearer token :(
+	private final String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDE1QGhvdG1haWwuY29tIiwiaWF0IjoxNjQ2MzE4NzMzLCJleHAiOjE2NDY0MDUxMzN9.kaQ4CYyi6ZSfoPpBcyPdbP3J6tS98npCIVppO2AxDXL9yZgw0510htppQAgaWDXmF66DSjT2RKUR2OSwQ2k-wA";
 	@Autowired
 	private MockMvc mvc;
 	

@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.alifetvaci.ReadingIsGood.exception.BadRequestException;
 import com.alifetvaci.ReadingIsGood.models.Customer;
 import com.alifetvaci.ReadingIsGood.repository.CustomerRepository;
 import com.alifetvaci.ReadingIsGood.services.IAuthenticationFacadeService;
@@ -34,6 +35,9 @@ public class UserDetailsServiceImpl implements UserDetailsService , IAuthenticat
 	@Override
 	public String getAuthanticatedCustomerId() {
 		CustomerDetailsImpl customerDetailsImpl = (CustomerDetailsImpl) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		if(customerDetailsImpl==null) {
+			throw new BadRequestException("fsdf");
+		}
 		return customerDetailsImpl.getId();
 	}
 	

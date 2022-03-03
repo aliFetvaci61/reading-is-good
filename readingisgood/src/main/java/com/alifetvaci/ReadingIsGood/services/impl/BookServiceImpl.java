@@ -29,7 +29,7 @@ public class BookServiceImpl implements BookService {
 	private static final Logger logger = LoggerFactory.getLogger(BookServiceImpl.class);
 
 	@Override
-	public synchronized boolean updateBookStockOrderCreate(List<OrderBook> list) { //if it happens if 2 or more users tries to buy one last book at the same time
+	public synchronized boolean updateBookStockOrderCreate(String customerId, List<OrderBook> list) { //if it happens if 2 or more users tries to buy one last book at the same time
 		//One thread one transaction, before the end of the transaction  the other transaction not working, just waiting .
 		for (OrderBook oB : list) {
 			Book bookStock = bookRepository.findById(oB.getBook()).orElse(null);
@@ -47,24 +47,24 @@ public class BookServiceImpl implements BookService {
 				bookStock.setTotal(bookStock.getTotal() - oB.getNumber());
 				Book saved = bookRepository.save(bookStock);
 				logger.info("Updated Book Stock because order created");
-				logService.insertLog(LogType.UPDATE_ENTITY, saved.toString(), book.toString());
+				logService.insertLog(customerId,LogType.UPDATE_ENTITY, saved.toString(), book.toString());
 			}
 		}
 		return true;
 	}
 
 	@Override
-	public Book persistNewBook(BookRequest bookRequest) {
+	public Book persistNewBook(String customerId,BookRequest bookRequest) {
 		Book book = new Book(bookRequest.getName(), bookRequest.getWriter(), bookRequest.getEdition(),
 				bookRequest.getTotal(), bookRequest.getPrice());
 		Book saved = bookRepository.save(book);
 		logger.info("Persisted New Book");
-		logService.insertLog(LogType.NEW_ENTITY, saved.toString(),null);
+		logService.insertLog(customerId, LogType.NEW_ENTITY, saved.toString(),null);
 		return saved;
 	}
 
 	@Override
-	public Book updateBookStock(String id, BookStockRequest bookStockRequest) {
+	public Book updateBookStock(String customerId, String id, BookStockRequest bookStockRequest) {
 		Book bookStock = bookRepository.findById(id).orElse(null);
 		if (bookStock == null) {
 			logger.info("Invalid book id : " + id);
@@ -77,7 +77,7 @@ public class BookServiceImpl implements BookService {
 
 		Book saved = bookRepository.save(bookStock);
 		logger.info("Updated Book Stock");
-		logService.insertLog(LogType.UPDATE_ENTITY, saved.toString(), book.toString());
+		logService.insertLog(customerId,LogType.UPDATE_ENTITY, saved.toString(), book.toString());
 		return saved;
 	}
 

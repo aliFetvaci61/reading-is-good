@@ -9,7 +9,7 @@ import com.alifetvaci.ReadingIsGood.payload.request.OrderBook;
 
 public interface BookService {
 
-	boolean updateBookStockOrderCreate(List<OrderBook> list);
-	Book updateBookStock(String id, BookStockRequest bookStockRequest);
-	Book persistNewBook(BookRequest bookRequest);
+	boolean updateBookStockOrderCreate(String customerId, List<OrderBook> list);
+	Book updateBookStock(String customerId, String id, BookStockRequest bookStockRequest);
+	Book persistNewBook(String customerId, BookRequest bookRequest);
 }

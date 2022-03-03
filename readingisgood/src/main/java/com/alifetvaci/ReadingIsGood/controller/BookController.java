@@ -15,6 +15,7 @@ import com.alifetvaci.ReadingIsGood.models.Book;
 import com.alifetvaci.ReadingIsGood.payload.request.BookRequest;
 import com.alifetvaci.ReadingIsGood.payload.request.BookStockRequest;
 import com.alifetvaci.ReadingIsGood.services.BookService;
+import com.alifetvaci.ReadingIsGood.services.IAuthenticationFacadeService;
 
 @RestController
 @RequestMapping("/api")
@@ -22,17 +23,20 @@ public class BookController {
 
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private IAuthenticationFacadeService iAuthenticationFacadeService;
 
 	@PostMapping("/book")
 	public ResponseEntity<Book> persistNewBook(@RequestBody @Valid BookRequest bookRequest) {
-		return ResponseEntity.ok(bookService.persistNewBook(bookRequest));
+		return ResponseEntity.ok(bookService.persistNewBook(iAuthenticationFacadeService.getAuthanticatedCustomerId(),bookRequest));
 
 	}
 
 	@PutMapping("/book/{id}")
 	public ResponseEntity<Book> updateBooksStock(@PathVariable String id,
 			@RequestBody @Valid BookStockRequest bookStockRequest) {
-		return ResponseEntity.ok(bookService.updateBookStock(id, bookStockRequest));
+		return ResponseEntity.ok(bookService.updateBookStock(iAuthenticationFacadeService.getAuthanticatedCustomerId(),id, bookStockRequest));
 
 	}
 

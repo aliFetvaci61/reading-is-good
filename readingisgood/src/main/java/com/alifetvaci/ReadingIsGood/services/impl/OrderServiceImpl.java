@@ -48,9 +48,9 @@ public class OrderServiceImpl implements OrderService{
 	private LogService logService;
 
 	@Override
-	public Order createOrder(String CustomerId, OrderRequest orderRequest) {
+	public Order createOrder(String customerId, OrderRequest orderRequest) {
 		Order order = new Order();
-		order.setCustomerId(CustomerId);
+		order.setCustomerId(customerId);
 		order.setOrderBooks(orderRequest.getOrderBook());
 		order.setOrderStatus(OrderStatus.NEW);
 		
@@ -61,9 +61,9 @@ public class OrderServiceImpl implements OrderService{
 		Order saved = orderRepository.save(order);
 		Order order1 =  new Order(saved.getId(),saved.getCustomerId(),saved.getOrderBooks(),saved.getOrderStatus(),saved.getCreatedAt(),saved.getUpdatedAt(),saved.getPurchase());
 		
-		logService.insertLog(LogType.NEW_ENTITY, saved.toString(), null);
+		logService.insertLog(customerId,LogType.NEW_ENTITY, saved.toString(), null);
 		
-		boolean updateBookStock = bookStockService.updateBookStockOrderCreate(orderRequest.getOrderBook());
+		boolean updateBookStock = bookStockService.updateBookStockOrderCreate(customerId,orderRequest.getOrderBook());
 
 		if (updateBookStock) {
 			Iterator<OrderBook> iterator = order.getOrderBooks().iterator();
@@ -83,7 +83,7 @@ public class OrderServiceImpl implements OrderService{
 		saved.setUpdatedAt(new Date());
 		logger.info("Order Created");
 		Order updated = orderRepository.save(saved);
-		logService.insertLog(LogType.NEW_ENTITY, updated.toString(), order1.toString());
+		logService.insertLog(customerId,LogType.NEW_ENTITY, updated.toString(), order1.toString());
 		return updated;
 	}
 
