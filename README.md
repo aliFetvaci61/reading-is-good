@@ -6,7 +6,8 @@ I created swagger.json for open api documentation and also I pushed postman coll
 
 # Change directory
 git clone https://github.com/aliFetvaci61/reading-is-good.git <br />
-cd readingisgood
+cd reading-is-good <br />
+cd readingisgood 
 
 # Create fat jar. open cmd or terminal run the following command
 
