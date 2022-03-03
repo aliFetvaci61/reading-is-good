@@ -6,7 +6,7 @@ I created swagger.json for open api documentation and also I pushed postman coll
 
 Authentication - JWT Authentication (bearer)
 
-Logging - Log all changes on entities in mongoDb logs collection.
+Logging all changes on entities to mongodb logs collection.
 
 # Change directory
 git clone https://github.com/aliFetvaci61/reading-is-good.git <br />
