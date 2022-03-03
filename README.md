@@ -30,3 +30,5 @@ docker build -t readingisgood .
 docker run -p 8080:8080 readingisgood
 
 (I am using docker desktop)
+
+If you are run testing you should change bearer token
