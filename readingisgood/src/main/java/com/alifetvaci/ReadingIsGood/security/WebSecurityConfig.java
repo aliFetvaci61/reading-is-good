@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.alifetvaci.ReadingIsGood.security.jwt.AuthEntryPointJwt;
 import com.alifetvaci.ReadingIsGood.security.jwt.AuthTokenFilter;
-import com.alifetvaci.ReadingIsGood.services.CustomerServiceImpl;
 import com.alifetvaci.ReadingIsGood.services.UserDetailsServiceImpl;
 
 @Configuration
@@ -40,9 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		authenticationManagerBuilder.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder()).and().inMemoryAuthentication() .withUser("Zack")
-        .password("aayush")
-        .roles("admin_role");
+		authenticationManagerBuilder.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
 	}
 
 	@Bean
@@ -62,7 +59,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
-			.antMatchers("/api/user/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

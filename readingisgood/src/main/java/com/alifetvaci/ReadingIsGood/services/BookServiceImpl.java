@@ -44,12 +44,8 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Book persistNewBook(BookRequest bookRequest) {
-		Book book = new Book();
-		book.setName(bookRequest.getName());
-		book.setWriter(bookRequest.getWriter());
-		book.setEdition(bookRequest.getEdition());
-		book.setTotal(bookRequest.getTotal());
-		book.setPrice(bookRequest.getPrice());
+		Book book = new Book(bookRequest.getName(), bookRequest.getWriter(), bookRequest.getEdition(),
+				bookRequest.getTotal(), bookRequest.getPrice());
 		Book saved = bookRepository.save(book);
 		logger.info("Persisted New Book");
 		return saved;

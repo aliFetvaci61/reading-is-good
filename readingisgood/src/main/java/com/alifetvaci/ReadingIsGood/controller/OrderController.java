@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alifetvaci.ReadingIsGood.models.Order;
 import com.alifetvaci.ReadingIsGood.payload.request.OrderRequest;
-import com.alifetvaci.ReadingIsGood.services.CustomerDetailsService;
+import com.alifetvaci.ReadingIsGood.services.IAuthenticationFacadeService;
 import com.alifetvaci.ReadingIsGood.services.OrderService;
 
 @RestController
@@ -28,50 +26,45 @@ import com.alifetvaci.ReadingIsGood.services.OrderService;
 public class OrderController {
 
 	@Autowired
-	private CustomerDetailsService customerDetailService;
+	private IAuthenticationFacadeService iAuthenticationFacadeService;
 
 	@Autowired
 	private OrderService orderService;
 
 	@PostMapping("/order")
-	@PreAuthorize("#authentication == authentication")
-	public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderRequest orderRequest,
-			Authentication authentication) {
-		String authanticationCustomerId = customerDetailService.getAuthanticationCustomerId(authentication);
+	public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderRequest orderRequest) {
 
-		return ResponseEntity.ok(orderService.createOrder(authanticationCustomerId, orderRequest));
+		return ResponseEntity
+				.ok(orderService.createOrder(iAuthenticationFacadeService.getAuthanticatedCustomerId(), orderRequest));
 
 	}
 
 	@GetMapping("/order")
-	@PreAuthorize("#authentication == authentication")
-	public ResponseEntity<?> getOrders(Authentication authentication, @RequestParam(defaultValue = "0") int page,
+	public ResponseEntity<?> getOrders(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "3") int size) {
 
-		String authanticationCustomerId = customerDetailService.getAuthanticationCustomerId(authentication);
-
-		return new ResponseEntity<>(orderService.getOrders(authanticationCustomerId, page, size), HttpStatus.OK);
+		return new ResponseEntity<>(
+				orderService.getOrders(iAuthenticationFacadeService.getAuthanticatedCustomerId(), page, size),
+				HttpStatus.OK);
 
 	}
 
 	@GetMapping("/order/{id}")
-	@PreAuthorize("#authentication == authentication")
-	public ResponseEntity<?> getOrderDetails(Authentication authentication, @PathVariable String id) {
-		String authanticationCustomerId = customerDetailService.getAuthanticationCustomerId(authentication);
+	public ResponseEntity<?> getOrderDetails(@PathVariable String id) {
 
-		return new ResponseEntity<>(orderService.getOrderDetails(authanticationCustomerId, id), HttpStatus.OK);
+		return new ResponseEntity<>(
+				orderService.getOrderDetails(iAuthenticationFacadeService.getAuthanticatedCustomerId(), id),
+				HttpStatus.OK);
 
 	}
 
 	@GetMapping("/order/listOrdersByDateInterval")
-	@PreAuthorize("#authentication == authentication")
-	public ResponseEntity<?> listOrdersByDateInterval(Authentication authentication,
+	public ResponseEntity<?> listOrdersByDateInterval(
 			@RequestParam(value = "startDate") @DateTimeFormat(pattern = "MMddyyyy") Date startDate,
 			@RequestParam(value = "endData") @DateTimeFormat(pattern = "MMddyyyy") Date endData) {
-		String authanticationCustomerId = customerDetailService.getAuthanticationCustomerId(authentication);
 
-		return new ResponseEntity<>(orderService.listOrdersByDateInterval(authanticationCustomerId, startDate, endData),
-				HttpStatus.OK);
+		return new ResponseEntity<>(orderService.listOrdersByDateInterval(
+				iAuthenticationFacadeService.getAuthanticatedCustomerId(), startDate, endData), HttpStatus.OK);
 	}
 
 }

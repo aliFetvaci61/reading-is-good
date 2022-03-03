@@ -1,6 +1,8 @@
 package com.alifetvaci.ReadingIsGood.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,7 +12,7 @@ import com.alifetvaci.ReadingIsGood.models.Customer;
 import com.alifetvaci.ReadingIsGood.repository.CustomerRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService , IAuthenticationFacadeService {
 
 	@Autowired
 	CustomerRepository customerRepository;
@@ -22,5 +24,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		return CustomerDetailsImpl.build(customer);
 	}
+
+	@Override
+	public Authentication getAuthentication() {
+		return SecurityContextHolder.getContext().getAuthentication();
+	}
+
+	@Override
+	public String getAuthanticatedCustomerId() {
+		CustomerDetailsImpl customerDetailsImpl = (CustomerDetailsImpl) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		return customerDetailsImpl.getId();
+	}
+	
+	
 
 }
