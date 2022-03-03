@@ -4,6 +4,10 @@ I am using Java (SDK 11), Spring Framework (spring boot) , mongodb
 
 I created swagger.json for open api documentation and also I pushed postman collection. You can use it.
 
+Authentication - JWT Authentication (bearer)
+
+Logging - Log all changes on entities in mongoDb logs collection.
+
 # Change directory
 git clone https://github.com/aliFetvaci61/reading-is-good.git <br />
 cd reading-is-good <br />
