@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService , IAuthenticat
 	public String getAuthanticatedCustomerId() {
 		CustomerDetailsImpl customerDetailsImpl = (CustomerDetailsImpl) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		if(customerDetailsImpl==null) {
-			throw new BadRequestException("fsdf");
+			throw new BadRequestException("User Not Found with JWT");
 		}
 		return customerDetailsImpl.getId();
 	}
